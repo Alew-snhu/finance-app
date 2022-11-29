@@ -9,7 +9,7 @@
     <ion-content :fullscreen="true">
       <div id="container">
         <div style="margin: 0 25% 0 ;">
-          <ion-button expand="block">
+          <ion-button expand="block" @click="viewCurrentMonth">
             <ion-icon slot="end" :icon="pieChart"></ion-icon>
             Current Month
           </ion-button>
@@ -27,7 +27,7 @@
   </ion-page>
 </template>
 
-<script>
+<script lang="ts">
 import {defineComponent} from "vue";
 import {IonBackButton, IonButton, IonButtons, IonContent, IonIcon, IonPage, IonTitle, IonToolbar} from "@ionic/vue";
 import {pieChart, book, addCircle} from 'ionicons/icons'
@@ -35,25 +35,24 @@ export default defineComponent({
   name: "ChoiceSelectPage",
   components: {
     IonPage,
+    IonContent,
     IonToolbar,
     IonButtons,
     IonBackButton,
     IonTitle,
     IonIcon,
     IonButton,
-    IonContent,
   },
   setup(){
     return {
       pieChart, book, addCircle
     }
   },
-  data(){
-    return {
-    }
-  },
-  methods: {
 
+  methods: {
+    viewCurrentMonth(){
+      this.$router.push("/currentMonth")
+    }
   }
 })
 </script>

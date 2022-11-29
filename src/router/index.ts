@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import HomePage from '../views/HomePage.vue'
 import AccountRegistrationPage from "@/views/AccountRegistrationPage.vue";
-import ChoiceSelectPage from "@/views/ChoiceSelectPage.vue";
+import ChoiceSelectPage from "../views/ChoiceSelectPage.vue";
+import CurrentMonthPage from "@/views/CurrentMonthPage.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -23,6 +24,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/choiceSelection",
     name: "Choice Selection",
     component: ChoiceSelectPage
+  },
+  {
+    path: "/currentMonth",
+    name: " Current Month",
+    component: CurrentMonthPage
   }
 ]
 
