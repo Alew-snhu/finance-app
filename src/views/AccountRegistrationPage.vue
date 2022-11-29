@@ -1,24 +1,24 @@
 <template>
   <ion-page>
-    <ion-header :translucent="true">
-      <ion-toolbar>
-        <ion-title>Ahead Of The Game Financial Tracker</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button default-href="/home"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Back Button</ion-title>
+    </ion-toolbar>
+
     <ion-content :fullscreen="true">
       <div id="container">
-          <ion-item class="textInput">
-            <ion-label position="floating">User Name</ion-label>
-            <ion-input v-model="vm.userCredentials.userName"></ion-input>
-          </ion-item>
-          <ion-item class="textInput">
-            <ion-label position="floating">Password</ion-label>
-            <ion-input v-model="vm.userCredentials.userPassword"></ion-input>
-          </ion-item>
+        <ion-item class="textInput">
+          <ion-label position="floating">User Name</ion-label>
+          <ion-input v-model="vm.userCredentials.userName"></ion-input>
+        </ion-item>
+        <ion-item class="textInput">
+          <ion-label position="floating">Password</ion-label>
+          <ion-input v-model="vm.userCredentials.userPassword"></ion-input>
+        </ion-item>
         <div style="margin: 0 25% 0 ;">
-          <ion-button expand="block" @click="createAccount">Create An Account</ion-button>
-          <ion-button expand="block" @click="submit">Submit</ion-button>
+          <ion-button expand="block">Create An Account</ion-button>
         </div>
       </div>
     </ion-content>
@@ -26,15 +26,28 @@
 </template>
 
 <script lang="ts">
-import {IonButton, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonPage, IonTitle, IonToolbar} from '@ionic/vue';
+import {
+  IonContent,
+  IonPage,
+  IonTitle,
+  IonButtons,
+  IonButton,
+  IonToolbar,
+  IonBackButton,
+  IonItem,
+  IonInput,
+  IonLabel
+} from '@ionic/vue';
 import { defineComponent } from 'vue';
 import HomePageViewModel from "../../view-models/home-page-view-model";
+
 export default defineComponent({
   name: 'HomePage',
   components: {
     IonPage,
-    IonHeader,
     IonToolbar,
+    IonButtons,
+    IonBackButton,
     IonTitle,
     IonContent,
     IonItem,
@@ -49,12 +62,7 @@ export default defineComponent({
     }
   },
   methods: {
-    createAccount() {
-      this.$router.push("/signup")
-    },
-    submit(){
-      this.$router.push("/choiceSelection")
-    }
+
   }
 });
 
@@ -63,7 +71,7 @@ export default defineComponent({
 <style scoped>
 #container {
   text-align: center;
-  
+
   position: absolute;
   left: 0;
   right: 0;
@@ -79,9 +87,9 @@ export default defineComponent({
 #container p {
   font-size: 16px;
   line-height: 22px;
-  
+
   color: #8c8c8c;
-  
+
   margin: 0;
 }
 

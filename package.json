@@ -20,7 +20,9 @@
     "core-js": "^3.6.5",
     "ionicons": "^6.0.3",
     "vue": "^3.2.21",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "vue-class-component": "^6.3.2",
+    "vue-property-decorator": "^7.3.0"
   },
   "devDependencies": {
     "@capacitor/cli": "4.5.0",
