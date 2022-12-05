@@ -2,8 +2,10 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import HomePage from '../views/HomePage.vue'
 import AccountRegistrationPage from "@/views/AccountRegistrationPage.vue";
-import ChoiceSelectPage from "../views/ChoiceSelectPage.vue";
-import CurrentMonthPage from "@/views/CurrentMonthPage.vue";
+import CurrentMonthPage from "@/views/BalanceOverview.vue";
+import Dashboard from "@/views/DataAnalyticsDashboard.vue";
+import BalanceOverview from "@/views/BalanceOverview.vue";
+import DataAnalyticsDashboard from "@/views/DataAnalyticsDashboard.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -21,14 +23,14 @@ const routes: Array<RouteRecordRaw> = [
     component: AccountRegistrationPage
   },
   {
-    path: "/choiceSelection",
-    name: "Choice Selection",
-    component: ChoiceSelectPage
+    path: "/dataAnalyticsDashboard",
+    name: "DataAnalyticsDashboard",
+    component: DataAnalyticsDashboard
   },
   {
-    path: "/currentMonth",
-    name: " Current Month",
-    component: CurrentMonthPage
+    path: "/balanceOverview",
+    name: "Balance Overview",
+    component: BalanceOverview
   }
 ]
 

@@ -1,11 +1,11 @@
 <template>
-  <ion-page>
+  <ion-page class="ion-page">
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>Ahead Of The Game Financial Tracker</ion-title>
+        <ion-title>{{vm.title}}</ion-title>
       </ion-toolbar>
     </ion-header>
-    
+
     <ion-content :fullscreen="true">
       <div id="container">
           <ion-item class="textInput">
@@ -26,10 +26,22 @@
 </template>
 
 <script lang="ts">
-import {IonButton, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonPage, IonTitle, IonToolbar} from '@ionic/vue';
-import { defineComponent } from 'vue';
+import {
+  IonButton,
+  IonContent,
+  IonHeader,
+  IonInput,
+  IonItem,
+  IonLabel,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  createAnimation, useIonRouter,
+} from '@ionic/vue';
 import HomePageViewModel from "../../view-models/home-page-view-model";
-export default defineComponent({
+import {useRouter} from "vue-router";
+
+export default {
   name: 'HomePage',
   components: {
     IonPage,
@@ -42,21 +54,23 @@ export default defineComponent({
     IonInput,
     IonButton,
   },
-  data() {
-    return {
-      vm: new HomePageViewModel(),
+  setup() {
+    const vm = new HomePageViewModel();
+    const router = useRouter()
 
+
+    const createAccount = () => {
+      router.push("/signup")
     }
-  },
-  methods: {
-    createAccount() {
-      this.$router.push("/signup")
-    },
-    submit(){
-      this.$router.push("/choiceSelection")
+    const submit = () => {
+      router.push("/dataAnalyticsDashboard")
+    }
+
+    return{
+      vm, router, createAccount, submit
     }
   }
-});
+};
 
 </script>
 
