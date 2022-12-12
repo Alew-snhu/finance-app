@@ -11,50 +11,62 @@
         <ion-grid>
           <ion-row>
             <ion-col size="12">
-              <div class="chart-container">
-                <BarChart ></BarChart>
-              </div>
+                <BarChart class="chart-container" ></BarChart>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col size="12">
-              <div class="chart-container">
-                <LineChart :chart-id="'chart'" :chartData="vm.chartData"></LineChart>
-              </div>
+                <LineChart class="chart-container" :chart-id="'chart'" :chartData="vm.chartData"></LineChart>
             </ion-col>
           </ion-row>
-          <div>
+          <div class="list-items">
           <ion-list :inset="true">
-            <ion-item button detail @Click="balanceOverview" :detailIcon="caretForwardOutline">
-              <ion-label>
-                <p>Account Balance</p>
-                <h2>$5233.44</h2>
-              </ion-label>
-            </ion-item>
-            <ion-item button detail :detailIcon="caretForwardOutline">
-              <ion-label>
-                <p>Credit Card Balance</p>
-                <h2>$4988.33</h2>
-              </ion-label>
-            </ion-item>
-            <ion-item button detail :detailIcon="caretForwardOutline">
-              <ion-label>
-                <p>Paypal Balance</p>
-                <h2>$3170.56</h2>
-              </ion-label>
-            </ion-item>
-            <ion-item button detail :detailIcon="caretForwardOutline">
-              <ion-label>
-                <p>Student Loan Balance</p>
-                <h2>$40,000.00</h2>
-              </ion-label>
-            </ion-item>
-            <ion-item button detail :detailIcon="caretForwardOutline">
-              <ion-label>
-                <p>Paragraph</p>
-                <h1>Heading</h1>
-              </ion-label>
-            </ion-item>
+            <ion-item-group>
+
+              <ion-item-divider color="medium">
+                <ion-label>
+                  Balances
+                </ion-label>
+                <ion-button slot="end">
+                  Add
+                  <ion-icon slot="end" :icon="addOutline"></ion-icon>
+                </ion-button>
+              </ion-item-divider>
+              <ion-item-sliding>
+                <ion-item button detail @Click="balanceOverview" :detailIcon="caretForwardOutline">
+                  <ion-label>
+                    <p>Account Balance</p>
+                    <h2>$5233.44</h2>
+                  </ion-label>
+                </ion-item>
+
+                <ion-item-options>
+                  <ion-item-option color="danger">
+                    <ion-icon size="large" :icon="trashOutline">
+                    </ion-icon>
+                  </ion-item-option>
+                </ion-item-options>
+
+              </ion-item-sliding>
+                <ion-item button detail :detailIcon="caretForwardOutline">
+                  <ion-label>
+                    <p>Credit Card Balance</p>
+                    <h2>$4988.33</h2>
+                  </ion-label>
+                </ion-item>
+                <ion-item button detail :detailIcon="caretForwardOutline">
+                  <ion-label>
+                    <p>Paypal Balance</p>
+                    <h2>$3170.56</h2>
+                  </ion-label>
+                </ion-item>
+                <ion-item button detail :detailIcon="caretForwardOutline">
+                  <ion-label>
+                    <p>Student Loan Balance</p>
+                    <h2>$40,000.00</h2>
+                  </ion-label>
+                </ion-item>
+            </ion-item-group>
           </ion-list>
           </div>
         </ion-grid>
@@ -79,8 +91,10 @@ import {
   IonMenu,
   IonHeader,
   IonMenuButton,
+  IonItemDivider,
+  IonItemGroup, IonButton, IonItemOptions, IonItemSliding, IonItemOption,
 } from "@ionic/vue";
-import {caretForwardOutline} from 'ionicons/icons'
+import {caretForwardOutline, addOutline, trashOutline} from 'ionicons/icons'
 import {useRouter} from "vue-router";
 import BarChart from "@/components/BarChart.vue";
 import LineChart from "@/components/LineChart.vue";
@@ -109,6 +123,12 @@ export default {
     IonLabel,
     IonContent,
     IonIcon,
+    IonButton,
+    IonItemDivider,
+    IonItemGroup,
+    IonItemSliding,
+    IonItemOptions,
+    IonItemOption,
   },
   setup() {
     const name = "DataAnalyticsDashboard";
@@ -122,6 +142,8 @@ export default {
     return {
       name,
       vm,
+      addOutline,
+      trashOutline,
       caretForwardOutline,
       contentId,
       balanceOverview
@@ -135,15 +157,18 @@ export default {
 
 
 .chart-container{
-
+  max-height: 275px;
+  max-width: 800px;
+  margin: auto;
 }
 
 ion-grid {
   --ion-grid-columns: 12;
 }
 
-ion-list {
-
+.list-items {
+  max-width: 1000px;
+  margin: auto;
 }
 
 </style>

@@ -7,30 +7,7 @@
       <ion-title>Back</ion-title>
     </ion-toolbar>
     <ion-content>
-
-        <PieChart/>
-
-
-
-      <ion-list :inset="true">
-        <ion-item>
-          <ion-label>Item 1</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Item 2</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Item 3</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Item 4</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>item 5</ion-label>
-        </ion-item>
-      </ion-list>
-
-
+      <AccountDataDisplay/>
     </ion-content>
   </ion-page>
 </template>
@@ -38,17 +15,18 @@
 <script lang="ts">
 import {defineComponent} from "vue";
 import {
-  IonBackButton,
-  IonButtons,
-  IonContent,
+  IonBackButton, IonButton,
+  IonButtons, IonCol,
+  IonContent, IonGrid, IonInput,
   IonItem,
   IonLabel,
-  IonList,
-  IonPage,
+  IonList, IonModal,
+  IonPage, IonRow,
   IonTitle,
   IonToolbar
 } from "@ionic/vue";
 import PieChart from "@/components/DoughnutChart.vue";
+import AccountDataDisplay from "@/components/AccountDataDisplay.vue";
 
 export default defineComponent({
   name: "BalanceOverview",
@@ -57,16 +35,29 @@ export default defineComponent({
     IonPage,
     IonToolbar,
     IonButtons,
+    IonButton,
+    IonModal,
+    IonInput,
     IonBackButton,
     IonTitle,
     IonContent,
     IonList,
     IonItem,
     IonLabel,
+    IonGrid,
+    IonRow,
+    IonCol,
+    AccountDataDisplay,
   }
 })
 </script>
 
 <style scoped>
 
+ion-label {
+  text-align: center;
+}
+ion-grid {
+  --ion-grid-columns: 12;
+}
 </style>

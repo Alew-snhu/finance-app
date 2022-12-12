@@ -1,27 +1,47 @@
 <template>
-  <ion-page class="ion-page">
+  <ion-page class="ion-page" id="main-content">
     <ion-header :translucent="true">
       <ion-toolbar>
         <ion-title>{{vm.title}}</ion-title>
       </ion-toolbar>
     </ion-header>
 
-    <ion-content :fullscreen="true">
-      <div id="container">
-          <ion-item class="textInput">
+    <ion-content>
+      <ion-grid>
+
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col size="8" size-lg="3" size-xl="2">
+          <ion-item>
             <ion-label position="floating">User Name</ion-label>
             <ion-input v-model="vm.userCredentials.userName"></ion-input>
           </ion-item>
-          <ion-item class="textInput">
+          <ion-item>
             <ion-label position="floating">Password</ion-label>
             <ion-input v-model="vm.userCredentials.userPassword"></ion-input>
           </ion-item>
-        <div style="margin: 0 25% 0 ;">
-          <ion-button expand="block" @click="createAccount">Create An Account</ion-button>
-          <ion-button expand="block" @click="submit">Submit</ion-button>
-        </div>
-      </div>
+          </ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col size="8" size-lg="2" size-xl="2">
+            <ion-button expand="block" @click="createAccount">Create An Account</ion-button>
+          </ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col size="8" size-lg="2" size-xl="2">
+            <ion-button expand="block" @click="submit">Submit</ion-button>
+          </ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+
+      </ion-grid>
     </ion-content>
+
   </ion-page>
 </template>
 
@@ -36,7 +56,9 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
-  createAnimation, useIonRouter,
+  IonRow,
+  IonCol,
+  IonGrid,
 } from '@ionic/vue';
 import HomePageViewModel from "../../view-models/home-page-view-model";
 import {useRouter} from "vue-router";
@@ -53,6 +75,9 @@ export default {
     IonLabel,
     IonInput,
     IonButton,
+    IonGrid,
+    IonRow,
+    IonCol,
   },
   setup() {
     const vm = new HomePageViewModel();
@@ -75,36 +100,14 @@ export default {
 </script>
 
 <style scoped>
-#container {
-  text-align: center;
-  
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+ion-content {
+  top:30%;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+ion-item {
+  margin-bottom: 15px;
 }
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-  
-  color: #8c8c8c;
-  
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
-}
-.textInput {
-  margin-right: 25%;
-  margin-left: 25%;
-  margin-bottom: 75px;
+ion-grid {
+  --ion-grid-columns: 12;
 }
 </style>

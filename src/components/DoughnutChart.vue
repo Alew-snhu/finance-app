@@ -1,6 +1,6 @@
 <template>
   <div>
-    <canvas id="container" :width="$props.width" :height="$props.height"></canvas>
+    <canvas id="container" :width="width" :height="height"></canvas>
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 import { defineComponent, h, PropType } from 'vue'
 
 import { Doughnut } from 'vue-chartjs'
-
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import {
   Chart as ChartJS,
   Title,
@@ -19,7 +19,7 @@ import {
   Plugin
 } from 'chart.js'
 
-ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale)
+ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, ChartDataLabels)
 export default defineComponent({
   name: 'DoughnutChart',
   components: {
@@ -32,11 +32,11 @@ export default defineComponent({
     },
     width: {
       type: Number,
-      default: 400
+      default: 600
     },
     height: {
       type: Number,
-      default: 400
+      default: 600
     },
     cssClasses: {
       default: '',
@@ -51,26 +51,40 @@ export default defineComponent({
       default: () => []
     }
   },
+
   setup(props) {
     const chartData = {
-      labels: ['VueJs', 'EmberJs', 'ReactJs', 'AngularJs'],
+      labels: ['VueJs', 'EmberJs'],
       datasets: [
         {
-          backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
-          data: [40, 20, 80, 10]
+          backgroundColor: ['#DD1B16', '#41B883'],
+          data: [40, 10],
         }
-      ]
+      ],
     }
 
-    const chartOptions = {
-      responsive: true,
-      maintainAspectRatio: false
-    }
+    const options = {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            // Change options for ALL labels of THIS CHART
+            datalabels: {
+              color: '#0be83f',
+              font: {
+                  size: 30
+              },
+
+
+            }
+          }
+        }
+
+
 
     return () =>
         h(Doughnut, {
           chartData,
-          chartOptions,
+          chartOptions: options,
           chartId: props.chartId,
           width: props.width,
           height: props.height,
@@ -84,8 +98,5 @@ export default defineComponent({
 </script>
 
 <style scoped>
-canvas {
-  max-height: 400px;
-  max-width: 400px;
-}
+
 </style>

@@ -1,27 +1,42 @@
 <template>
-  <ion-page>
+  <ion-page class="ion-page" id="main-content">
     <ion-toolbar>
       <ion-buttons slot="start">
         <ion-back-button default-href="/home"></ion-back-button>
       </ion-buttons>
-      <ion-title>Back Button</ion-title>
+      <ion-title>Back</ion-title>
     </ion-toolbar>
 
-    <ion-content :fullscreen="true">
-      <div id="container">
-        <ion-item class="textInput">
-          <ion-label position="floating">User Name</ion-label>
-          <ion-input v-model="vm.userCredentials.userName"></ion-input>
-        </ion-item>
-        <ion-item class="textInput">
-          <ion-label position="floating">Password</ion-label>
-          <ion-input v-model="vm.userCredentials.userPassword"></ion-input>
-        </ion-item>
-        <div style="margin: 0 25% 0 ;">
-          <ion-button expand="block">Create An Account</ion-button>
-        </div>
-      </div>
+    <ion-content>
+      <ion-grid>
+
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col size="8" size-lg="3" size-xl="2">
+            <ion-item>
+              <ion-label position="floating">User Name</ion-label>
+              <ion-input v-model="vm.userCredentials.userName"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Password</ion-label>
+              <ion-input v-model="vm.userCredentials.userPassword"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col size="8" size-lg="2" size-xl="1">
+            <ion-button expand="block">Submit</ion-button>
+          </ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+
+      </ion-grid>
     </ion-content>
+
+
   </ion-page>
 </template>
 
@@ -69,36 +84,15 @@ export default defineComponent({
 </script>
 
 <style scoped>
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+ion-content {
+  top:30%;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+ion-item {
+  margin-bottom: 15px;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
-}
-.textInput {
-  margin-right: 25%;
-  margin-left: 25%;
-  margin-bottom: 75px;
+ion-grid {
+  --ion-grid-columns: 12;
 }
 </style>

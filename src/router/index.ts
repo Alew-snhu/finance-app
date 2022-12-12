@@ -2,8 +2,6 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import HomePage from '../views/HomePage.vue'
 import AccountRegistrationPage from "@/views/AccountRegistrationPage.vue";
-import CurrentMonthPage from "@/views/BalanceOverview.vue";
-import Dashboard from "@/views/DataAnalyticsDashboard.vue";
 import BalanceOverview from "@/views/BalanceOverview.vue";
 import DataAnalyticsDashboard from "@/views/DataAnalyticsDashboard.vue";
 

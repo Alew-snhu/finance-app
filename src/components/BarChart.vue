@@ -1,6 +1,6 @@
 <template>
   <div>
-    <canvas id="container" :width="$props.width" :height="$props.height"></canvas>
+    <canvas id="container" :width="width" :height="height"></canvas>
   </div>
 </template>
 
@@ -97,8 +97,5 @@ export default defineComponent({
 </script>
 
 <style scoped>
-canvas {
-  max-height: 275px;
-  max-width: 800px;
-}
+
 </style>
