@@ -2,7 +2,8 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12">
-        <PieChart class="chart-container"/>
+        <echart-bar class="chart-container"></echart-bar>
+<!--        <PieChart class="chart-container"></PieChart>-->
       </ion-col>
     </ion-row>
     <div class="list-items">
@@ -19,16 +20,16 @@
             </ion-button>
           </ion-item-divider>
 
-          <ion-item-sliding>
+          <ion-item-sliding v-for="(item, i) in vm.transactionList" :key="i">
 
             <ion-item>
               <ion-label>
-                <p>12/10/2022</p>
-                <h2>Expense Desc</h2>
+                <p>{{item.Date}}</p>
+                <h2>{{item.Location}}</h2>
               </ion-label>
               <ion-label class="expense-amount">
                 <p>expense</p>
-                <h2>$5233.44</h2>
+                <h2>{{item.Amount}}</h2>
               </ion-label>
             </ion-item>
 
@@ -78,6 +79,9 @@ import {
 } from "@ionic/vue";
 import DataEditModal from "@/components/DataEditModal.vue";
 import {pencilOutline, trashOutline, addOutline} from 'ionicons/icons'
+import EchartBar from "@/components/EchartBar.vue";
+import AccountDataDisplayViewModel from "../../view-models/AccountDataDisplayViewModel";
+
 export default defineComponent({
   name: "AccountDataDisplay",
   components: {
@@ -103,6 +107,7 @@ export default defineComponent({
     IonItemSliding,
     IonItemOptions,
     IonItemOption,
+    EchartBar,
   },
 
   data() {
@@ -120,10 +125,12 @@ export default defineComponent({
        modalTitle: "Add Entry",
         items: [
           {title: "Date", value: ""},
+          {title: "Type", value: ""},
           {title: "Location", value: ""},
           {title: "Amount", value: ""}
         ]
       },
+      vm: new AccountDataDisplayViewModel(),
       pencilOutline,
       trashOutline,
       addOutline,
@@ -157,8 +164,9 @@ export default defineComponent({
 
       const { data, role } = await modal.onWillDismiss();
 
-      if (role === 'confirm') {
-        this.message = `Hello, ${data}!`;
+      if (role === 'confirm' && data) {
+
+       this.vm.transactionList.push(data)
       }
     }
   },

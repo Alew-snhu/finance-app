@@ -34,7 +34,7 @@
         <ion-row>
           <ion-col></ion-col>
           <ion-col size="8" size-lg="2" size-xl="2">
-            <ion-button expand="block" @click="submit">Submit</ion-button>
+            <ion-button expand="block" @click="loadDebts">Submit</ion-button>
           </ion-col>
           <ion-col></ion-col>
         </ion-row>
@@ -62,8 +62,10 @@ import {
 } from '@ionic/vue';
 import HomePageViewModel from "../../view-models/home-page-view-model";
 import {useRouter} from "vue-router";
+import {defineComponent} from "vue";
+import Firebase from "@/firebase";
 
-export default {
+export default defineComponent({
   name: 'HomePage',
   components: {
     IonPage,
@@ -83,19 +85,25 @@ export default {
     const vm = new HomePageViewModel();
     const router = useRouter()
 
-
     const createAccount = () => {
       router.push("/signup")
     }
     const submit = () => {
       router.push("/dataAnalyticsDashboard")
     }
-
     return{
-      vm, router, createAccount, submit
+      vm, router,createAccount, submit
     }
+  },
+  methods: {
+    async loadDebts() {
+      let firebase = new Firebase();
+      const debts = await firebase.getDebts();
+      console.log(JSON.stringify(debts));
+    },
+
   }
-};
+});
 
 </script>
 

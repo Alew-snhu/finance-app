@@ -11,9 +11,9 @@
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-    <ion-item v-for="(item, i) in modalProps.items" :key="i">
+    <ion-item v-for="(item, i) in modalProps.items" :key="i" >
       <ion-label position="stacked">{{item.title}}</ion-label>
-      <ion-input>{{item.value}}</ion-input>
+      <ion-input v-model="newTransactionContainer[i]">{{item.value}}</ion-input>
     </ion-item>
   </ion-content>
 </template>
@@ -57,15 +57,27 @@ export default defineComponent({
   },
   data(){
     return{
-      name1: name
+      name1: name,
+      newTransactionContainer: [],
+      newTransaction: {
+        Date: "",
+        Type: "",
+        Location: "",
+        Amount: "",
+      }
     }
   },
   methods: {
     cancel() {
       return modalController.dismiss(null, 'cancel');
     },
-    confirm(): any {
-      return modalController.dismiss(this.name1, 'confirm');
+    async confirm() {
+
+      const [Date, Type, Location, Amount] = this.newTransactionContainer
+
+      this.newTransaction = {Date, Type, Location, Amount};
+
+      return modalController.dismiss(this.newTransaction, 'confirm');
     },
   },
 })

@@ -48,7 +48,14 @@ export default defineComponent({
     IonRow,
     IonCol,
     AccountDataDisplay,
+  },
+  data(){
+
+  },
+  methods :{
+
   }
+
 })
 </script>
 

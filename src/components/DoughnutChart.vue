@@ -8,7 +8,6 @@
 import { defineComponent, h, PropType } from 'vue'
 
 import { Doughnut } from 'vue-chartjs'
-import ChartDataLabels from 'chartjs-plugin-datalabels';
 import {
   Chart as ChartJS,
   Title,
@@ -19,7 +18,7 @@ import {
   Plugin
 } from 'chart.js'
 
-ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, ChartDataLabels)
+ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale)
 export default defineComponent({
   name: 'DoughnutChart',
   components: {
@@ -66,17 +65,7 @@ export default defineComponent({
     const options = {
           responsive: true,
           maintainAspectRatio: false,
-          plugins: {
-            // Change options for ALL labels of THIS CHART
-            datalabels: {
-              color: '#0be83f',
-              font: {
-                  size: 30
-              },
 
-
-            }
-          }
         }
 
 

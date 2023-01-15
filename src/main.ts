@@ -22,11 +22,14 @@ import '@ionic/vue/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+window.addEventListener('DOMContentLoaded', async () => {
 
-const app = createApp(App)
-  .use(IonicVue)
-  .use(router);
-  
-router.isReady().then(() => {
-  app.mount('#app');
-});
+  const app = createApp(App)
+      .use(IonicVue)
+      .use(router);
+
+    router.isReady().then(() => {
+      app.mount('#app');
+  });
+
+})

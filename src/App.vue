@@ -7,8 +7,9 @@
 
 <script lang="ts">
 import { IonApp, IonRouterOutlet } from '@ionic/vue';
-import { defineComponent } from 'vue';
+import {defineComponent} from 'vue';
 import Menu from "@/components/ToolbarMenu.vue";
+
 
 export default defineComponent({
   name: 'App',
@@ -16,7 +17,8 @@ export default defineComponent({
     IonApp,
     IonRouterOutlet,
     Menu
-  }
+  },
+
 });
 </script>
 <style>

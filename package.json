@@ -3,13 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --port 7130",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@capacitor-community/sqlite": "^4.5.0",
     "@capacitor/app": "4.1.1",
     "@capacitor/core": "4.5.0",
     "@capacitor/haptics": "4.1.0",
@@ -17,15 +18,27 @@
     "@capacitor/status-bar": "4.1.0",
     "@ionic/vue": "^6.0.0",
     "@ionic/vue-router": "^6.0.0",
+    "@types/sqlite3": "^3.1.8",
+    "axios": "^1.2.1",
     "chart.js": "^3.9.1",
     "chartjs-plugin-datalabels": "^2.2.0",
     "core-js": "^3.6.5",
+    "echarts": "^5.4.1",
+    "firebase": "^9.15.0",
     "ionicons": "^6.0.3",
+    "node-polyfill-webpack-plugin": "^2.0.1",
+    "path-browserify": "^1.0.1",
+    "sqlite3": "^5.1.4",
+    "stream": "^0.0.2",
+    "stream-browserify": "^3.0.0",
+    "ts-node": "^10.9.1",
+    "util": "^0.12.5",
     "vue": "^3.2.21",
     "vue-chartjs": "^4.1.2",
     "vue-class-component": "^6.3.2",
     "vue-property-decorator": "^7.3.0",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "vue-sqlite-hook": "^3.0.3"
   },
   "devDependencies": {
     "@capacitor/cli": "4.5.0",
@@ -48,7 +61,7 @@
     "eslint-plugin-vue": "^8.2.0",
     "jest": "^27.3.1",
     "ts-jest": "^27.0.7",
-    "typescript": "^4.3.5"
+    "typescript": "^4.9.4"
   },
   "description": "An Ionic project"
 }
