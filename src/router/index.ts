@@ -4,6 +4,7 @@ import HomePage from '../views/HomePage.vue'
 import AccountRegistrationPage from "@/views/AccountRegistrationPage.vue";
 import BalanceOverview from "@/views/BalanceOverview.vue";
 import DataAnalyticsDashboard from "@/views/DataAnalyticsDashboard.vue";
+import MonthListView from "@/components/MonthListView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -26,9 +27,15 @@ const routes: Array<RouteRecordRaw> = [
     component: DataAnalyticsDashboard
   },
   {
-    path: "/balanceOverview",
-    name: "Balance Overview",
-    component: BalanceOverview
+    path: "/balanceOverview/:entryId",
+    name: "BalanceOverview",
+    component: BalanceOverview,
+    props: true
+  },
+  {
+    path: "/monthListView",
+    name: "MonthListView",
+    component: MonthListView,
   }
 ]
 

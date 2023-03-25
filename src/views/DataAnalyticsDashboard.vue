@@ -22,50 +22,26 @@
           <div class="list-items">
           <ion-list :inset="true">
             <ion-item-group>
-
-              <ion-item-divider color="medium">
+              <ion-item button detail @Click="openMonthListView" :detailIcon="caretForwardOutline">
                 <ion-label>
-                  Balances
+                  <h1>Expenses</h1>
                 </ion-label>
-                <ion-button slot="end">
-                  Add
-                  <ion-icon slot="end" :icon="addOutline"></ion-icon>
-                </ion-button>
-              </ion-item-divider>
-              <ion-item-sliding>
-                <ion-item button detail @Click="balanceOverview" :detailIcon="caretForwardOutline">
-                  <ion-label>
-                    <p>Account Balance</p>
-                    <h2>$5233.44</h2>
-                  </ion-label>
-                </ion-item>
-
-                <ion-item-options>
-                  <ion-item-option color="danger">
-                    <ion-icon size="large" :icon="trashOutline">
-                    </ion-icon>
-                  </ion-item-option>
-                </ion-item-options>
-
-              </ion-item-sliding>
-                <ion-item button detail :detailIcon="caretForwardOutline">
-                  <ion-label>
-                    <p>Credit Card Balance</p>
-                    <h2>$4988.33</h2>
-                  </ion-label>
-                </ion-item>
-                <ion-item button detail :detailIcon="caretForwardOutline">
-                  <ion-label>
-                    <p>Paypal Balance</p>
-                    <h2>$3170.56</h2>
-                  </ion-label>
-                </ion-item>
-                <ion-item button detail :detailIcon="caretForwardOutline">
-                  <ion-label>
-                    <p>Student Loan Balance</p>
-                    <h2>$40,000.00</h2>
-                  </ion-label>
-                </ion-item>
+              </ion-item>
+              <ion-item button detail :detailIcon="caretForwardOutline">
+                <ion-label>
+                  <h1>Payments</h1>
+                </ion-label>
+              </ion-item>
+              <ion-item button detail :detailIcon="caretForwardOutline">
+                <ion-label>
+                  <h1>Debts</h1>
+                </ion-label>
+              </ion-item>
+              <ion-item button detail :detailIcon="caretForwardOutline">
+                <ion-label>
+                  <h1>Bill Information</h1>
+                </ion-label>
+              </ion-item>
             </ion-item-group>
           </ion-list>
           </div>
@@ -98,7 +74,9 @@ import {caretForwardOutline, addOutline, trashOutline} from 'ionicons/icons'
 import {useRouter} from "vue-router";
 import BarChart from "@/components/BarChart.vue";
 import LineChart from "@/components/LineChart.vue";
-import LineChartViewModel from "../../view-models/LineChartViewModel";
+import DataAnalyticsDashboardViewModel from "../../view-models/DataAnalyticsDashboardViewModel";
+import {reactive} from "vue";
+
 
 export default {
   name: 'DataAnalyticsDashboard',
@@ -133,11 +111,11 @@ export default {
   setup() {
     const name = "DataAnalyticsDashboard";
     const router = useRouter();
-    const vm = new LineChartViewModel()
+    const vm = reactive(new DataAnalyticsDashboardViewModel())
     const contentId = 'main-content'
 
-    const balanceOverview = () => {
-      router.push('/balanceOverview')
+    const openMonthListView = () => {
+      router.push('/monthListView')
     }
     return {
       name,
@@ -146,7 +124,7 @@ export default {
       trashOutline,
       caretForwardOutline,
       contentId,
-      balanceOverview
+      openMonthListView
     }
   }
 }

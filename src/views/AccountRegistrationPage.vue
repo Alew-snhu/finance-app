@@ -15,7 +15,7 @@
           <ion-col size="8" size-lg="3" size-xl="2">
             <ion-item>
               <ion-label position="floating">User Name</ion-label>
-              <ion-input v-model="vm.userCredentials.userName"></ion-input>
+              <ion-input v-model="vm.userCredentials.userEmail"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Password</ion-label>
@@ -28,7 +28,10 @@
         <ion-row>
           <ion-col></ion-col>
           <ion-col size="8" size-lg="2" size-xl="1">
-            <ion-button expand="block">Submit</ion-button>
+            <ion-button
+                expand="block"
+                @click="fbConfig.createAccount(vm.userCredentials.userEmail, vm.userCredentials.userPassword)">
+              Submit</ion-button>
           </ion-col>
           <ion-col></ion-col>
         </ion-row>
@@ -51,10 +54,13 @@ import {
   IonBackButton,
   IonItem,
   IonInput,
-  IonLabel
+  IonLabel,
+  IonCol,
+  IonRow, IonGrid
 } from '@ionic/vue';
 import { defineComponent } from 'vue';
-import HomePageViewModel from "../../view-models/home-page-view-model";
+import RegistrationPageViewModel from "../../view-models/RegistrationPageViewModel";
+import FirebaseConfig from "@/firebase-config";
 
 export default defineComponent({
   name: 'HomePage',
@@ -69,10 +75,15 @@ export default defineComponent({
     IonLabel,
     IonInput,
     IonButton,
+    IonCol,
+    IonRow,
+    IonGrid,
+
   },
-  data() {
+  setup() {
     return {
-      vm: new HomePageViewModel(),
+      vm: new RegistrationPageViewModel(),
+      fbConfig: new FirebaseConfig()
 
     }
   },

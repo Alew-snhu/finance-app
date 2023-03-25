@@ -14,7 +14,7 @@
           <ion-col size="8" size-lg="3" size-xl="2">
           <ion-item>
             <ion-label position="floating">User Name</ion-label>
-            <ion-input v-model="vm.userCredentials.userName"></ion-input>
+            <ion-input v-model="vm.userCredentials.userEmail"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Password</ion-label>
@@ -34,7 +34,10 @@
         <ion-row>
           <ion-col></ion-col>
           <ion-col size="8" size-lg="2" size-xl="2">
-            <ion-button expand="block" @click="loadDebts">Submit</ion-button>
+            <ion-button
+                expand="block"
+                @click="submit(vm.userCredentials.userEmail,vm.userCredentials.userPassword)">
+              Submit</ion-button>
           </ion-col>
           <ion-col></ion-col>
         </ion-row>
@@ -60,11 +63,10 @@ import {
   IonCol,
   IonGrid,
 } from '@ionic/vue';
-import HomePageViewModel from "../../view-models/home-page-view-model";
+import RegistrationPageViewModel from "../../view-models/RegistrationPageViewModel";
 import {useRouter} from "vue-router";
 import {defineComponent} from "vue";
-import Firebase from "@/firebase";
-
+import FirebaseConfig from "@/firebase-config";
 export default defineComponent({
   name: 'HomePage',
   components: {
@@ -82,25 +84,33 @@ export default defineComponent({
     IonCol,
   },
   setup() {
-    const vm = new HomePageViewModel();
+    const vm = new RegistrationPageViewModel();
+    const fbConfig = new FirebaseConfig();
     const router = useRouter()
 
     const createAccount = () => {
       router.push("/signup")
     }
-    const submit = () => {
-      router.push("/dataAnalyticsDashboard")
+    const submit = (userEmail:string, userPassword:string) => {
+      fbConfig.signIn(userEmail, userPassword)
+      router.push("/dataAnalyticsDashboard");
     }
+    // const checkDate = () => {
+    //   const date1 = DateTime.fromFormat('January 2023', 'LLLL yyyy');
+    //   const date2 = DateTime.fromFormat('February 2023', 'LLLL yyyy');
+    //   // console.log(`date1: month => ${date1.month} year => ${date1.year}`);
+    //   // console.log(`date2: month => ${date2.month} year => ${date2.year}`);
+    //   // console.log(date1 < date2);
+    //   const currentDocId = DateTime.now().toFormat('LLLL yyyy')
+    //   console.log(currentDocId)
+    // }
     return{
-      vm, router,createAccount, submit
+      vm, router,createAccount, submit,fbConfig
     }
   },
   methods: {
-    async loadDebts() {
-      let firebase = new Firebase();
-      const debts = await firebase.getDebts();
-      console.log(JSON.stringify(debts));
-    },
+
+
 
   }
 });

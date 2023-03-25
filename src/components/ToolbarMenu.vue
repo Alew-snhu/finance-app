@@ -34,6 +34,7 @@ import {
 import { defineComponent } from 'vue';
 import {analyticsOutline, logOutOutline} from 'ionicons/icons'
 import {useRouter} from "vue-router";
+import FirebaseConfig from "@/firebase-config";
 export default defineComponent({
   components: {
     IonButtons,
@@ -51,7 +52,7 @@ export default defineComponent({
   },
   setup() {
     const router = useRouter()
-
+    const fbConfig = new FirebaseConfig()
 
 
     const goHome = () => {
@@ -59,6 +60,7 @@ export default defineComponent({
       menuController.close()
     }
     const logOut = () => {
+      fbConfig.signOut();
       router.push('/home')
       menuController.close()
     }
@@ -77,7 +79,7 @@ ion-menu::part(backdrop) {
 
 ion-menu::part(container) {
   border-radius: 0 20px 20px 0;
-  box-shadow: 4px 0px 16px rgba(0, 255, 51, 0.18);
+  box-shadow: 4px 0 16px rgba(0, 255, 51, 0.18);
 }
 
 ion-item {
