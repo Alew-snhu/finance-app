@@ -1,7 +1,8 @@
 export interface IEditExpense {
     id: string
-    amount: string
+    amount: number
     location:string
     type: string
     date: string
+
 }

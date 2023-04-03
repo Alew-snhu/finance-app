@@ -1,11 +1,11 @@
 <template>
-  <ion-menu :type="'overlay'" content-id="main-content">
+  <ion-menu :type="'overlay'" >
     <ion-header>
       <ion-toolbar color="primary">
         <ion-title>Get Ahead Of The Game</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding">
+    <ion-content class="ion-padding" >
       <ion-list>
         <ion-item button @click="goHome">
           <ion-icon slot="end" :icon="analyticsOutline" size="lage"></ion-icon>

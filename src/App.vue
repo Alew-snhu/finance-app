@@ -1,7 +1,9 @@
 <template>
   <ion-app>
-    <Menu></Menu>
-    <ion-router-outlet />
+    <Menu content-id="main-content"></Menu>
+    <Suspense>
+    <ion-router-outlet id="main-content" />
+    </Suspense>
   </ion-app>
 </template>
 

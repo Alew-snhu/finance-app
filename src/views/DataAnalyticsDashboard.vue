@@ -14,22 +14,22 @@
                 <BarChart class="chart-container" ></BarChart>
             </ion-col>
           </ion-row>
-          <ion-row>
+          <ion-row style="margin-top:20px">
             <ion-col size="12">
-                <LineChart class="chart-container" :chart-id="'chart'" :chartData="vm.chartData"></LineChart>
+                <LineChart class="chart-container" ></LineChart>
             </ion-col>
           </ion-row>
           <div class="list-items">
           <ion-list :inset="true">
             <ion-item-group>
-              <ion-item button detail @Click="openMonthListView" :detailIcon="caretForwardOutline">
+              <ion-item button detail @Click="openMonthListView(NavigationEnums.Expenses)" :detailIcon="caretForwardOutline">
                 <ion-label>
                   <h1>Expenses</h1>
                 </ion-label>
               </ion-item>
-              <ion-item button detail :detailIcon="caretForwardOutline">
+              <ion-item button detail @Click="openMonthListView(NavigationEnums.Income)" :detailIcon="caretForwardOutline">
                 <ion-label>
-                  <h1>Payments</h1>
+                  <h1>Income</h1>
                 </ion-label>
               </ion-item>
               <ion-item button detail :detailIcon="caretForwardOutline">
@@ -52,34 +52,44 @@
 
 <script lang="ts">
 import {
+  IonButton,
   IonButtons,
   IonCol,
   IonContent,
   IonGrid,
+  IonHeader,
   IonIcon,
+  IonItem,
+  IonItemDivider,
+  IonItemGroup,
+  IonItemOption,
+  IonItemOptions,
+  IonItemSliding,
+  IonLabel,
+  IonList,
+  IonMenu,
+  IonMenuButton,
   IonPage,
   IonRow,
   IonTitle,
   IonToolbar,
-  IonList,
-  IonLabel,
-  IonItem,
-  IonMenu,
-  IonHeader,
-  IonMenuButton,
-  IonItemDivider,
-  IonItemGroup, IonButton, IonItemOptions, IonItemSliding, IonItemOption,
 } from "@ionic/vue";
-import {caretForwardOutline, addOutline, trashOutline} from 'ionicons/icons'
+import {addOutline, caretForwardOutline, trashOutline} from 'ionicons/icons'
 import {useRouter} from "vue-router";
 import BarChart from "@/components/BarChart.vue";
 import LineChart from "@/components/LineChart.vue";
 import DataAnalyticsDashboardViewModel from "../../view-models/DataAnalyticsDashboardViewModel";
 import {reactive} from "vue";
+import {NavigationEnums} from "@/Enums/NavigationEnums";
 
 
 export default {
   name: 'DataAnalyticsDashboard',
+  computed: {
+    NavigationEnums() {
+      return NavigationEnums
+    }
+  },
   props:{
 
   },
@@ -112,10 +122,19 @@ export default {
     const name = "DataAnalyticsDashboard";
     const router = useRouter();
     const vm = reactive(new DataAnalyticsDashboardViewModel())
-    const contentId = 'main-content'
 
-    const openMonthListView = () => {
-      router.push('/monthListView')
+    const openMonthListView = (navEnum:NavigationEnums) => {
+      switch(navEnum){
+        case NavigationEnums.Expenses:{
+          router.push({name: "ExpenseMonthListView", params: {category: navEnum}})
+          break;
+        }
+        case NavigationEnums.Income:{
+          router.push({name: "IncomeMonthListView", params: {category: navEnum}})
+          break;
+        }
+      }
+
     }
     return {
       name,
@@ -123,8 +142,7 @@ export default {
       addOutline,
       trashOutline,
       caretForwardOutline,
-      contentId,
-      openMonthListView
+      openMonthListView,
     }
   }
 }

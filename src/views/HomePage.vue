@@ -14,11 +14,11 @@
           <ion-col size="8" size-lg="3" size-xl="2">
           <ion-item>
             <ion-label position="floating">User Name</ion-label>
-            <ion-input v-model="vm.userCredentials.userEmail"></ion-input>
+            <ion-input type="text" v-model="vm.userCredentials.userEmail"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Password</ion-label>
-            <ion-input v-model="vm.userCredentials.userPassword"></ion-input>
+            <ion-input type="password" v-model="vm.userCredentials.userPassword"></ion-input>
           </ion-item>
           </ion-col>
           <ion-col></ion-col>

@@ -57,7 +57,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, onMounted, reactive} from "vue";
+import {defineComponent, reactive} from "vue";
 import {
   IonBackButton,
   IonButton,
@@ -83,7 +83,7 @@ import {
     IonProgressBar
 } from "@ionic/vue";
 import {modalController} from "@ionic/core/components";
-import DataEditModal from "@/components/DataEditModal.vue";
+import ExpenseModal from "@/components/ExpenseModal.vue";
 import {addOutline, caretForwardOutline, pencilOutline, trashOutline} from "ionicons/icons";
 import MonthListViewModel from "../../view-models/MonthListViewModel";
 import ExpenseService from "@/services/expense-service";
@@ -92,6 +92,7 @@ import {useRouter} from "vue-router";
 
 export default defineComponent({
   name: "MonthListView",
+  props:['category'],
   components: {
     IonPage,
     IonToolbar,
@@ -116,17 +117,15 @@ export default defineComponent({
     IonItemOption,
     IonProgressBar
   },
-  setup() {
+  async setup() {
     const vm = reactive(new MonthListViewModel());
     const router = useRouter();
 
-    onMounted(async () => {
-      const es = new ExpenseService();
-      vm.currentMonth = await es.getParentDocs(false)
-    })
+    const es = new ExpenseService();
+    vm.currentMonth = await es.getParentDocs(false, es.colName)
 
     const viewEntries = (entryId: string) => {
-      router.push({name: "BalanceOverview", params: {entryId: entryId}})
+      router.push({name: "ExpenseOverview", params: {entryId: entryId}})
     }
     return {
       vm,
@@ -147,7 +146,7 @@ export default defineComponent({
       }
 
       const modal = await modalController.create({
-        component: DataEditModal,
+        component: ExpenseModal,
         componentProps: {
           modalProps: addModalProps
         }
@@ -166,13 +165,13 @@ export default defineComponent({
 
         const es = new ExpenseService();
         await es.setParentDocument(em);
-
+        this.vm.currentMonth = await es.getParentDocs(false, es.colName)
         this.vm.loading = false;
       }
     },
     async loadPreviousMonths() {
       const es = new ExpenseService()
-      this.vm.previousMonths = await es.getParentDocs(true)
+      this.vm.previousMonths = await es.getParentDocs(true, es.colName)
     },
 
 

@@ -1,7 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore} from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
-export default class FirebaseConfig {
+
+export default  class FirebaseConfig {
     protected firebaseConfig = {
         apiKey: "AIzaSyB731ibVXnSe8DWolRKlbIP_gXKJ8enGp4",
         authDomain: "finance-app-4d838.firebaseapp.com",
@@ -54,5 +55,6 @@ export default class FirebaseConfig {
                 console.log(errorCode, errorMessage)
             })
     }
+
 }
 

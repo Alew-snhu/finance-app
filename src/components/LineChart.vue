@@ -1,100 +1,53 @@
 <template>
-  <div>
-    <canvas id="container" :width="width" :height="height"></canvas>
+  <div id="chart">
+    <apex-charts type="line" height="300" :options="data.chartOptions" :series="data.series"></apex-charts>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, h, PropType } from 'vue'
-
-import { Line } from 'vue-chartjs'
-import {
-  Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
-  LineElement,
-  LinearScale,
-  PointElement,
-  CategoryScale,
-  Plugin
-} from 'chart.js'
-
-ChartJS.register(
-    Title,
-    Tooltip,
-    Legend,
-    LineElement,
-    LinearScale,
-    PointElement,
-    CategoryScale
-)
-export default defineComponent( {
-  name: "LineChart",
+import ApexCharts from 'vue3-apexcharts'
+export default {
   components: {
-    Line
+    ApexCharts,
   },
-  props: {
-    chartId: {
-      type: String,
-      default: 'line-chart'
-    },
-    width: {
-      type: Number,
-      default: 800
-    },
-    height: {
-      type: Number,
-      default: 275
-    },
-    cssClasses: {
-      default: '',
-      type: String
-    },
-    styles: {
-      type: Object as PropType<Partial<CSSStyleDeclaration>>,
-      default: () => {}
-    },
-    plugins: {
-      type: Array as PropType<Plugin<'line'>[]>,
-      default: () => []
-    },
-    chartData: {
-      type: Object ,
-      default: () => {}
-    }
-  },
-  setup(props) {
-    const chartData = {
-      labels: props.chartData.chartLabels,
-      datasets: [
-        {
-          label: 'Data One',
-          backgroundColor: '#ff0000',
-          borderColor: 'rgb(0, 192, 0)',
-          data: props.chartData.chartDataArray
-        }
-      ]
-    }
+  data(){
+    return{
+      data: {
+        series: [{
+          name: "Desktops",
+          data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+        }],
+        chartOptions: {
+          chart: {
+            toolbar:{
+              show:false,
+            },
+            type: 'line',
+            zoom: {
+              enabled: false
+            }
+          },
+          dataLabels: {
+            enabled: false
+          },
+          stroke: {
+            curve: 'straight'
+          },
+          title: {
+            text: 'Product Trends by Month',
+            align: 'left'
+          },
+          grid: {
 
-    const chartOptions = {
-      responsive: true,
-      maintainAspectRatio: false
+          },
+          xaxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+          }
+        },
+      },
     }
-
-    return () =>
-        h(Line, {
-          chartData,
-          chartOptions,
-          chartId: props.chartId,
-          width: props.width,
-          height: props.height,
-          cssClasses: props.cssClasses,
-          styles: props.styles,
-          plugins: props.plugins
-        })
   }
-})
+}
 </script>
 
 <style scoped>

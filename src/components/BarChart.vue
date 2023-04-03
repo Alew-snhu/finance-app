@@ -1,98 +1,70 @@
 <template>
-  <div>
-    <canvas id="container" :width="width" :height="height"></canvas>
+  <div id="chart">
+    <apex-charts type="bar" height="300" :options="data.chartOptions" :series="data.series"></apex-charts>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, h, PropType } from 'vue'
-import { Bar } from 'vue-chartjs'
-import {
-  Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
-  BarElement,
-  CategoryScale,
-  LinearScale,
-  Plugin
-} from 'chart.js'
-
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
-export default defineComponent({
-  name: "BarChart",
+import ApexCharts from 'vue3-apexcharts'
+export default {
   components: {
-    Bar
+    ApexCharts,
   },
-  props: {
-    chartId: {
-      type: String,
-      default: 'bar-chart'
-    },
-    width: {
-      type: Number,
-      default: 800
-    },
-    height: {
-      type: Number,
-      default: 275
-    },
-    cssClasses: {
-      default: '',
-      type: String
-    },
-    styles: {
-      type: Object as PropType<Partial<CSSStyleDeclaration>>,
-      default: () => {}
-    },
-    plugins: {
-      type: Array as PropType<Plugin<'bar'>[]>,
-      default: () => []
+  data() {
+    return {
+      data: {
+        series: [{
+          data: [44, 55, 41, 64, 22, 43, 21, 41, 21, 64, 210, 4300]
+        },
+          {
+          data: [53, 32, 33, 52, 13, 44, 32, 13, 33, 44, 320, 1300  ]
+        }],
+        chartOptions: {
+          chart: {
+            theme: 'dark',
+            type: 'bar',
+            toolbar: {
+              show: false,
+            },
+          },
+          title: {
+            text: 'Product Trends by Month',
+            align: 'left'
+          },
+          colors:['#4fff6e'],
+          plotOptions: {
+            bar: {
+              borderRadius: 4,
+              barHeight:'60%',
+            }
+          },
+          dataLabels: {
+            enabled: true,
+          },
+          tooltip: {
+            enabled: true,
+            fillSeriesColor: true,
+            theme: 'dark',
+          },
+          xaxis: {
+            labels: {
+              style: {
+                colors: ['white'],
+              }
+            },
+          },
+          yaxis: {
+            labels: {
+              style: {
+                colors:['white']
+              }
+            },
+          },
+        },
+      }
     }
-  },
-  setup(props) {
-    const chartData = {
-      labels: [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December'
-      ],
-      datasets: [
-        {
-          label: 'Monthly Expenses',
-          backgroundColor: '#f87979',
-          data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
-        }
-      ]
-    }
-
-    const chartOptions = {
-      responsive: true,
-      maintainAspectRatio: false
-    }
-
-    return () =>
-        h(Bar, {
-          chartData,
-          chartOptions,
-          chartId: props.chartId,
-          width: props.width,
-          height: props.height,
-          cssClasses: props.cssClasses,
-          styles: props.styles,
-          plugins: props.plugins
-        })
   }
-})
+}
 
 </script>
 
